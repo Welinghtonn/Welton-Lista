@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <h1>Welton Lista</h1>
+    </header>
+
+    <div class="container">
+        <ion-icon class="adicionar" name="add-outline"></ion-icon>
+        <input type="text" id="valor" placeholder="Adicione uma tarefa" />
+        <button onclick="Lista()">Enviar</button>
+    </div>
+
+    <main>
+        <h3>Lista</h3>
+        <div class="lista">
+            <div id="root"></div>
+        </div>
+    </main>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+<script src="script.js"></script>
+
+</html>
