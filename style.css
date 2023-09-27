@@ -86,10 +86,10 @@ h3{
 button{
     color: #fff;
     background-color: #FF1493;
-    border-radius: 5px;
     padding: 8px;
     cursor: pointer;
     border: none;
+    outline: none;
 }
 
 button:hover{
@@ -97,7 +97,6 @@ button:hover{
 }
 
 .chek{
-    background-color: #000;
     border: none;
     height: 26px;
     width: 26px;

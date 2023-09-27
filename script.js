@@ -1,10 +1,4 @@
-var array = [];
-array = {
-    id: 1,
-    name: valorInput,
-    del: Boolean
-}
-
+var array = JSON.parse(localStorage.getItem('array')) || [];
 const list = document.querySelector(".lista")
 
 function Lista() {
@@ -12,42 +6,55 @@ function Lista() {
     if (valorInput === "") {
         return
     } else {
-        list.innerHTML = ""
-        array.push(valorInput);
-        array.forEach((item) => {
-            let container = document.createElement("div");
-            let checkbox = document.createElement("input");
-            let p = document.createElement("p");
-            let button = document.createElement("button");
-            const del = document.createElement("del");
+        let itens = {
+            nome: valorInput,
+            chekout: false/true
+        }
+        array.push(itens.nome)
+        localStorage.setItem('array', JSON.stringify(array))
 
-            container.className = "container";
-            checkbox.type = "checkbox";
-            checkbox.addEventListener("change", () => {
-                console.log(`Check no item: ${item}`);
-                if(checkbox.checked === true){
-                    container.style.backgroundColor = "green"
-                }else{
-                    container.style.backgroundColor = "white"
-                }
-            });
-
-            checkbox.className = "chek"
-            button.className = "delete";
-            p.innerText = item;
-            del.innerText = item;
-            p.className = "text"
-
-            container.append(checkbox, p, button);
-            list.appendChild(container);
-
-            button.addEventListener('click', function handleClick() {
-                container.innerHTML = ""
-                array = []
-
-            });
-        })
+        console.log(array)
+        Itens();
     }
 }
 
+function Itens() {
+    let itens = {
+        chekout: false
+    }
+    list.innerHTML = ""
+    array.forEach((item) => {
+        let container = document.createElement("div");
+        let checkbox = document.createElement("input");
+        let p = document.createElement("p");
+        let button = document.createElement("button");
+        const del = document.createElement("del");
 
+        container.className = "container";
+        checkbox.type = "checkbox";
+        checkbox.checked = itens.chekout
+        checkbox.addEventListener("change", () => {
+            itens.chekout = checkbox.checked
+            if (itens.chekout) {
+                container.style.backgroundColor = "green"
+                localStorage.setItem("chek", itens.chekout)
+                array.push(itens.chekout)
+                console.log(array)
+            } else {
+                container.style.backgroundColor = "white"
+                localStorage.setItem("chek", itens.chekout)
+            }
+        });
+        
+        checkbox.className = "chek"
+        button.className = "delete";
+        p.innerText = item;
+        del.innerText = item;
+        p.className = "text"
+
+        container.append(checkbox, p, button);
+        list.appendChild(container);
+    })
+}
+
+document.addEventListener("DOMContentLoaded", Itens);
