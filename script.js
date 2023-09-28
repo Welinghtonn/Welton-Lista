@@ -1,7 +1,12 @@
 var array = JSON.parse(localStorage.getItem('array')) || [];
 const list = document.querySelector(".lista");
 
-
+document.getElementById("valor").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      Lista();
+    }
+  });
 function Lista() {
     var valorInput = document.getElementById("valor").value;
     if (valorInput === "") {
@@ -14,14 +19,15 @@ function Lista() {
         }
         array.push(itens)
         localStorage.setItem('array', JSON.stringify(array))
-
+        document.getElementById("valor").value = "";
         Itens();
     }
 }
 
 function Itens() {
     list.innerHTML = ""
-    array.forEach((item) => {
+    const reversedArray = [...array].reverse();
+    reversedArray.forEach((item) => {
         let container = document.createElement("div");
         let checkbox = document.createElement("input");
         let p = document.createElement("p");
@@ -34,10 +40,17 @@ function Itens() {
         checkbox.addEventListener("change", (e) => {
            handleCheck(item.id, e.target.checked);
         });
-        
+
         checkbox.className = "chek"
         console.log(array)
         button.className = "delete";
+        button.innerHTML = `<p><ion-icon name="trash"></ion-icon></p>`
+        button.addEventListener("click", () => {
+            if (confirm("Você tem certeza que deseja excluir este item?")) {
+                handleDelete(item.id);
+            }
+        });
+
         p.innerText = item.nome;
         del.innerText = item.nome;
         del.className = "text"
@@ -52,12 +65,19 @@ function Itens() {
 
 function handleCheck (id, value){
     const itemAtual = array.find(item => item.id === id);
-
     itemAtual.checked = value;
-
     localStorage.setItem("array",  JSON.stringify(array));
 
     Itens();
+}
+
+function handleDelete(id) {
+    const itemIndex = array.findIndex(item => item.id === id);
+    if (itemIndex !== -1) {
+        array.splice(itemIndex, 1);
+        localStorage.setItem("array", JSON.stringify(array));
+        Itens();
+    }
 }
 
 document.addEventListener("DOMContentLoaded", Itens);

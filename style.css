@@ -75,6 +75,9 @@ main{
 }
 
 .text{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     width: 100%;
 }
 
@@ -100,10 +103,21 @@ button:hover{
     border: none;
     height: 26px;
     width: 26px;
+    outline: none;
+
+    color: #FF1493;
 }
 
+
 .delete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 24px;
-    width: 26px;
+    width: 24px;
+}
+
+del{
+    color: #00FA9A
 }
 
